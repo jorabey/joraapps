@@ -33,21 +33,21 @@
       "short_name": "Do'kon",
       "description": "Ilovalar ro'yxatini ko'rish",
       "url": "/apps",
-      "icons": [{ "src": "icons/shortcut-store.png", "sizes": "192x192" }]
+      "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }]
     },
     {
       "name": "Mening ilovalarim",
       "short_name": "Ilovalarim",
       "description": "Ulangan ilovalar ro'yxati",
       "url": "/app-connections",
-      "icons": [{ "src": "icons/shortcut-apps.png", "sizes": "192x192" }]
+      "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }]
     },
     {
       "name": "Shaxsiy profil",
       "short_name": "Profil",
       "description": "Hisob qaydnomasi sozlamalari",
       "url": "/profile",
-      "icons": [{ "src": "icons/shortcut-profile.png", "sizes": "192x192" }]
+      "icons": [{ "src": "icons/icon-192.png", "sizes": "192x192" }]
     }
   ]
 }
