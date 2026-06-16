@@ -1,10 +1,16 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
+// vite.config.js ichida namuna:
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import { VitePWA } from 'vite-plugin-pwa';
 
 export default defineConfig({
-  plugins: [react()],
-  server: {
-    host: true,
-    port: 5173,
-  },
-})
+  plugins: [
+    react(),
+    VitePWA({
+      registerType: 'autoUpdate', // 🚀 Yangilanishlar avtomatik o'tishi uchun juda muhim!
+      manifest: {
+        // manifest sozlamalari...
+      }
+    })
+  ]
+});
