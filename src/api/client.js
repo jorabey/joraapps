@@ -5,7 +5,7 @@
 // and a small typed error shape matching the server's AppError.
 // ============================================================
 
-const BASE_URL = 'https://nexa-server-three.vercel.app/api/v1';
+const BASE_URL = 'https://api-joraapps.vercel.app/api/v1';
 
 let accessToken = localStorage.getItem('accessToken') || null;
 let refreshPromise = null;
