@@ -65,9 +65,6 @@
   "silent": true,
   "autoJobCancelation": true
 },
-"unsupportedPlatforms": {
-  "browser": ["ie"]
-},
   "cleanUrls": true,
   "trailingSlash": false
 }
