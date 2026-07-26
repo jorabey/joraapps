@@ -1,7 +1,7 @@
 import { useAuth } from '../context/AuthContext';
 
 
-const BASE_URL = 'https://api-joraapps.vercel.app/api/v1';
+const BASE_URL = 'http://10.16.190.39:5000/api/v1';
 
 let accessToken = sessionStorage.getItem('accessToken') || null;
 let refreshPromise = null;
