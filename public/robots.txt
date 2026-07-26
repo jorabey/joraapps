@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://joraapps.vercel.app/sitemap.xml

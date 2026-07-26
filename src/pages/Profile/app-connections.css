@@ -1,0 +1,135 @@
+.conn-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 16px;
+  border-bottom: 1px solid var(--hairline);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: background var(--dur-fast);
+}
+
+.conn-row:last-child { border-bottom: none; }
+.conn-row:active { background: var(--bg-2); }
+
+.conn-row__icon {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--r-md);
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.conn-row__icon--placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-3);
+  color: var(--text-0);
+  font-size: 18px;
+  font-weight: 700;
+  font-family: var(--font-display);
+}
+
+.conn-row__info {
+  flex: 1;
+  min-width: 0;
+}
+
+.conn-row__name {
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--text-0);
+  margin: 0 0 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.conn-row__perms {
+  font-size: 12px;
+  color: var(--text-2);
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.conn-row__manage {
+  background: var(--bg-3);
+  border: none;
+  color: var(--text-1);
+  font-size: 12.5px;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: var(--r-pill);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+/* Manage overlay */
+.manage-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(5,6,9,0.6);
+  backdrop-filter: blur(6px);
+  z-index: 500;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.manage-menu {
+  width: 100%;
+  max-width: 460px;
+  background: var(--bg-2);
+  border-radius: var(--r-xl) var(--r-xl) 0 0;
+  border: 1px solid var(--hairline-strong);
+  padding-bottom: max(16px, var(--safe-bottom));
+  animation: sheet-up var(--dur-slow) var(--ease-spring);
+}
+
+.manage-menu__grip {
+  width: 36px;
+  height: 4px;
+  border-radius: var(--r-pill);
+  background: var(--hairline-strong);
+  margin: 10px auto 0;
+}
+
+.manage-menu__header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 20px 4px;
+}
+
+.manage-menu__icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+}
+
+.manage-menu__name {
+  font-size: 16px;
+  font-weight: 700;
+  font-family: var(--font-display);
+}
+
+.manage-menu__item {
+  display: block;
+  width: calc(100% - 32px);
+  margin: 6px 16px 0;
+  padding: 14px 0;
+  background: var(--bg-3);
+  border: none;
+  border-radius: var(--r-md);
+  color: var(--text-0);
+  font-size: 15px;
+  font-family: var(--font-body);
+  font-weight: 600;
+  cursor: pointer;
+  text-align: center;
+}
+
+.manage-menu__item--danger { color: var(--danger); }

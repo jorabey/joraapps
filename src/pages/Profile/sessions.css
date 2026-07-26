@@ -1,0 +1,72 @@
+.session-card {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  background: var(--bg-1);
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-md);
+  padding: 14px 16px;
+}
+
+.session-card--current {
+  border-color: var(--violet);
+  background: var(--violet-dim);
+}
+
+.session-card__icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: var(--bg-3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-1);
+  flex-shrink: 0;
+}
+
+.session-card--current .session-card__icon {
+  background: var(--violet-dim);
+  color: var(--violet);
+}
+
+.session-card__info {
+  flex: 1;
+  min-width: 0;
+}
+
+.session-card__device {
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--text-0);
+  margin: 0 0 3px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.session-card__badge {
+  font-size: 11px;
+  background: var(--violet);
+  color: #0A0B0F;
+  border-radius: var(--r-pill);
+  padding: 2px 8px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.session-card__meta {
+  font-size: 12.5px;
+  color: var(--text-2);
+  margin: 0 0 3px;
+}
+
+.session-card__time {
+  font-size: 12px;
+  color: var(--text-2);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}

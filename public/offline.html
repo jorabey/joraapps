@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Premium Cinematic Fullscreen | JoraApps</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: none;
+    }
+
+    body, html {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      background-color: #f2f2f7;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+
+    /* --- TO'LIQ EKRANLI PREMIUM KONTEYNER --- */
+    #gameContainer {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+      background: #ffffff;
+      overflow: hidden;
+      z-index: 5;
+    }
+
+    /* --- REALISTIK KINEMATIK BLUR VIGNETTE (O'yinga yanada yaqinroq kelgan effekt) ---
+       Protsessorni qiynamasligi uchun statik element sifatida blur qilinib, keshlanadi. 
+       Bu usul MX-Linux'da 60 FPS silliqlikni kafolatlaydi. */
+    .cinematic-blur-vignette {
+      position: absolute;
+      /* Ekranga yopishib, yaqinroq kelishi uchun inset va border o'lchamlari mukammallashtirildi */
+      inset: -50px;
+      border: min(15vw, 120px) solid #f2f2f7; 
+      border-radius: 60px;
+      filter: blur(35px);
+      -webkit-filter: blur(35px);
+      pointer-events: none;
+      z-index: 10;
+    }
+
+    canvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    /* --- MINIMALIST DESIGN UI --- */
+    .score-ui {
+      position: absolute;
+      top: 7%;
+      left: 0;
+      width: 100%;
+      text-align: center;
+      z-index: 15;
+      pointer-events: none;
+    }
+
+    .score-number {
+      font-size: 84px;
+      font-weight: 200;
+      color: #1c1c1e;
+      letter-spacing: -3px;
+      line-height: 1;
+    }
+
+    .best-score {
+      font-size: 11px;
+      font-weight: 700;
+      color: #a2a2a7;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-top: 6px;
+    }
+
+    /* --- PREMIUM PLUSH / MO'YNALI SHIRIN KO'K TUGMA (High-End Casual Style) --- */
+    .premium-plush-btn {
+      position: absolute;
+      bottom: 15%;
+      left: 50%;
+      transform: translateX(-50%) scale(0);
+      background: linear-gradient(135deg, #3498db, #2980b9);
+      border: none;
+      color: #ffffff;
+      font-size: 18px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      /* Yunglar chetidan yaqqol ko'rinishi uchun kengroq padding */
+      padding: 22px 50px; 
+      cursor: pointer;
+      z-index: 25;
+      opacity: 0;
+      pointer-events: none;
+      border-radius: 30px;
+      
+      /* Pastdagi maxsus SVG turbulentlik filtrini tugmaga bog'laymiz (Yung effektini beruvchi kuch) */
+      filter: url(#fuzzy-fur-filter);
+      -webkit-filter: url(#fuzzy-fur-filter);
+      
+      box-shadow: 
+        0 10px 25px rgba(41, 128, 185, 0.5),
+        inset 0 -5px 10px rgba(0,0,0,0.2);
+      
+      text-shadow: 0 2px 3px rgba(0, 0, 0, 0.2);
+      transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.25), opacity 0.3s ease;
+    }
+
+    .premium-plush-btn.show {
+      transform: translateX(-50%) scale(1);
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    /* Bosilganda xuddi yumshoq yungli o'yinchoqni ezgandek juda yoqimli qisqarishi */
+    .premium-plush-btn:active {
+      transform: translateX(-50%) scale(0.95) translateY(6px);
+      box-shadow: 
+        0 4px 0 #1864ab,
+        0 10px 20px rgba(34, 139, 230, 0.3);
+    }
+
+    .start-tip {
+      position: absolute;
+      top: 55%;
+      width: 100%;
+      text-align: center;
+      color: #c7c7cc;
+      font-size: 14px;
+      font-weight: 500;
+      z-index: 12;
+      pointer-events: none;
+      transition: opacity 0.3s;
+    }
+  </style>
+</head>
+<body>
+  <svg style="position: absolute; width: 0; height: 0;">
+    <defs>
+      <filter id="fuzzy-fur-filter">
+        <!-- Turbulent shovqin hosil qilish (Yung tolalarining asosi) -->
+        <feTurbulence type="fractalNoise" baseFrequency="0.7" numOctaves="3" result="noise" />
+        <!-- Shovqin yordamida tugma chetlarini g'adir-budir yungli holatga surish -->
+        <feDisplacementMap in="SourceGraphic" in2="noise" scale="14" xChannelSelector="R" yChannelSelector="G" />
+      </filter>
+    </defs>
+  </svg>
+
+  <div id="gameContainer">
+    <!-- O'yinga yanada yaqinlashgan, ko'zni charchatmaydigan professional blur chegarasi -->
+    <div class="cinematic-blur-vignette"></div>
+    
+    <div class="score-ui">
+      <div class="score-number" id="scoreText">0</div>
+      <div class="best-score" id="bestText">BEST 0</div>
+    </div>
+
+    <div class="start-tip" id="startTip">Boshlash uchun suring yoki bosing</div>
+
+    <canvas id="gameCanvas"></canvas>
+
+    <!-- O'sha siz aytgan, professional darajadagi shirin, yumshoq ko'k tugma -->
+    <button class="premium-plush-btn" id="retryBtn">Qayta urinish</button>
+  </div>
+
+  <script>
+    const container = document.getElementById('gameContainer');
+    const canvas = document.getElementById('gameCanvas');
+    const ctx = canvas.getContext('2d');
+    const scoreText = document.getElementById('scoreText');
+    const bestText = document.getElementById('bestText');
+    const retryBtn = document.getElementById('retryBtn');
+    const startTip = document.getElementById('startTip');
+
+    // !!! LOW-SPEC OPTIMALLASH: Grafik protsessorni yuklamaslik uchun piksellar nisbati 1 ga tenglashtirildi !!!
+    const dpr = 1; 
+    let w, h;
+
+    function resizeEngine() {
+      w = container.clientWidth;
+      h = container.clientHeight;
+      canvas.width = w * dpr;
+      canvas.height = h * dpr;
+      ctx.scale(dpr, dpr);
+    }
+    resizeEngine();
+    window.addEventListener('resize', resizeEngine);
+
+    // GAME STATES
+    let gameState = 'START';
+    let score = 0;
+    let highScore = localStorage.getItem('jora_premium_best') || 0;
+    bestText.innerText = `BEST ${highScore}`;
+
+    const gravity = 0.38;
+    const jumpStrength = -11.5;
+
+    let player = {
+      x: 0, y: 0, radius: 13,
+      vx: 0, vy: 0, targetX: 0,
+      squashX: 1, squashY: 1
+    };
+
+    let platforms = [];
+    let obstacles = [];
+    let particles = [];
+
+    function initPlayer() {
+      player.x = w / 2;
+      player.y = h - 200;
+      player.targetX = w / 2;
+      player.vx = 0;
+      player.vy = jumpStrength;
+      player.squashX = 1;
+      player.squashY = 1;
+    }
+
+    function buildWorld() {
+      platforms = [];
+      obstacles = [];
+      particles = [];
+      
+      // Boshlang'ich xavfsiz maydon
+      platforms.push({ x: w / 2 - 65, y: h - 140, width: 130, height: 8 });
+
+      // Ketma-ket tekis generatsiya
+      for (let i = 0; i < 8; i++) {
+        spawnPlatform(h - 140 - (i * 110));
+      }
+    }
+
+    function spawnPlatform(yPos) {
+      let pWidth = Math.max(55, 95 - (score * 0.3));
+      let pX = Math.random() * (w - pWidth);
+      platforms.push({ x: pX, y: yPos, width: pWidth, height: 8 });
+
+      // Kuchiz tizimlar uchun optimallash: to'siqlar faqat ma'lum balandlikdan so'ng chiqadi
+      if (score > 8 && Math.random() < 0.4) {
+        obstacles.push({
+          x: Math.random() * w,
+          y: yPos - 35,
+          radius: 8,
+          speed: (Math.random() * 1.4 + 1.2) * (Math.random() < 0.5 ? 1 : -1)
+        });
+      }
+    }
+
+    // ADAPTIVE CONTROL (Sichqoncha va sensor butun ekranda xatosiz ishlaydi)
+    function handleInput(e) {
+      const rect = canvas.getBoundingClientRect();
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      player.targetX = clientX - rect.left;
+
+      if (gameState === 'START') {
+        gameState = 'PLAYING';
+        startTip.style.opacity = '0';
+      }
+    }
+
+    window.addEventListener('mousemove', handleInput);
+    window.addEventListener('touchmove', handleInput, { passive: true });
+    window.addEventListener('touchstart', handleInput, { passive: true });
+
+    // LIGHTWEIGHT PHYSICS ENGINE
+    function updateMechanics() {
+      if (gameState !== 'PLAYING') return;
+
+      // Silliq ergashish (Lerp)
+      player.x += (player.targetX - player.x) * 0.24;
+
+      if (player.x < player.radius) player.x = player.radius;
+      if (player.x > w - player.radius) player.x = w - player.radius;
+
+      player.vy += gravity;
+      player.y += player.vy;
+
+      // Kamera harakati (Silliq ko'tarilish)
+      if (player.y < h / 2) {
+        let diffY = (h / 2) - player.y;
+        player.y += diffY;
+        
+        platforms.forEach(p => p.y += diffY);
+        obstacles.forEach(o => o.y += diffY);
+        particles.forEach(pt => pt.y += diffY);
+
+        score += Math.round(diffY * 0.12);
+        scoreText.innerText = score;
+      }
+
+      // Platformaga qo'nish
+      if (player.vy > 0) {
+        platforms.forEach(p => {
+          if (
+            player.x + player.radius > p.x &&
+            player.x - player.radius < p.x + p.width &&
+            player.y + player.radius >= p.y &&
+            player.y - player.radius <= p.y + p.height
+          ) {
+            player.vy = jumpStrength;
+            player.squashX = 1.35;
+            player.squashY = 0.65;
+            createSplash(player.x, player.y + player.radius);
+          }
+        });
+      }
+
+      // To'siqlar harakati va to'qnashuv
+      obstacles.forEach(o => {
+        o.x += o.speed;
+        if (o.x < o.radius || o.x > w - o.radius) o.speed *= -1;
+
+        let dx = player.x - o.x;
+        let dy = player.y - o.y;
+        if (dx*dx + dy*dy < (player.radius + o.radius) * (player.radius + o.radius)) {
+          triggerGameOver();
+        }
+      });
+
+      // Eski platformalarni o'chirish va yangilash
+      if (platforms.length > 0 && platforms[0].y > h) {
+        platforms.shift();
+        let topY = platforms[platforms.length - 1].y;
+        spawnPlatform(topY - 110);
+      }
+
+      // Ekrandan pastga yiqilish
+      if (player.y > h + 40) {
+        triggerGameOver();
+      }
+
+      // Shaklni elastik tiklash
+      player.squashX += (1 - player.squashX) * 0.16;
+      player.squashY += (1 - player.squashY) * 0.16;
+    }
+
+    function createSplash(x, y) {
+      for (let i = 0; i < 4; i++) {
+        particles.push({
+          x: x, y: y,
+          vx: (Math.random() - 0.5) * 4,
+          vy: (Math.random() - 0.5) * 2 - 1,
+          radius: Math.random() * 2 + 1,
+          alpha: 1
+        });
+      }
+    }
+
+    function triggerGameOver() {
+      gameState = 'GAMEOVER';
+      if (score > highScore) {
+        highScore = score;
+        localStorage.setItem('jora_premium_best', highScore);
+        bestText.innerText = `BEST ${highScore}`;
+      }
+      retryBtn.classList.add('show');
+    }
+
+    // CLEAN HIGH-END RENDER MODEL
+    function draw() {
+      ctx.clearRect(0, 0, w, h);
+
+      // Platformalar (Premium minimal tekis uslub)
+      ctx.fillStyle = '#e5e5ea';
+      platforms.forEach(p => {
+        ctx.beginPath();
+        ctx.roundRect(p.x, p.y, p.width, p.height, 4);
+        ctx.fill();
+      });
+
+      // To'siqlar
+      ctx.fillStyle = '#2c2c2e';
+      obstacles.forEach(o => {
+        ctx.beginPath();
+        ctx.arc(o.x, o.y, o.radius, 0, Math.PI * 2);
+        ctx.fill();
+      });
+
+      // Zarralar (Splash)
+      particles.forEach((pt, idx) => {
+        pt.x += pt.vx;
+        pt.y += pt.vy;
+        pt.alpha -= 0.04;
+        if (pt.alpha <= 0) {
+          particles.splice(idx, 1);
+          return;
+        }
+        ctx.fillStyle = `rgba(44, 44, 46, ${pt.alpha})`;
+        ctx.beginPath();
+        ctx.arc(pt.x, pt.y, pt.radius, 0, Math.PI * 2);
+        ctx.fill();
+      });
+
+      // Qahramon (Smooth Jelly Charcoal Ball)
+      if (gameState !== 'GAMEOVER') {
+        ctx.fillStyle = '#000000';
+        ctx.beginPath();
+        let rx = player.radius * player.squashX;
+        let ry = player.radius * player.squashY;
+        ctx.ellipse(player.x, player.y, rx, ry, 0, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    // SINGLE RUNTIME ENGINE LOOP
+    function masterEngineLoop() {
+      updateMechanics();
+      draw();
+      requestAnimationFrame(masterEngineLoop);
+    }
+
+    // RESET FUNCTION
+    function cleanReset() {
+      score = 0;
+      scoreText.innerText = '0';
+      initPlayer();
+      buildWorld();
+      retryBtn.classList.remove('show');
+      gameState = 'PLAYING';
+    }
+
+    // INIT
+    initPlayer();
+    buildWorld();
+    masterEngineLoop();
+
+    // BUTTON EVENT
+    retryBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      cleanReset(); // Lahzada, qotishlarsiz toza start!
+    });
+  </script>
+</body>
+</html>

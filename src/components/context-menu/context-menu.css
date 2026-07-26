@@ -1,0 +1,66 @@
+.ctx-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 600;
+}
+
+.ctx-menu {
+  position: fixed;
+  min-width: 200px;
+  background: var(--bg-2);
+  border: 1px solid var(--hairline-strong);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-lift);
+  padding: 5px;
+  z-index: 601;
+  animation: ctx-pop var(--dur-base) var(--ease-spring);
+  overflow: hidden;
+}
+
+@keyframes ctx-pop {
+  from { opacity: 0; transform: scale(0.93) translateY(-6px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+.ctx-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  height: 42px;
+  padding: 0 12px;
+  background: none;
+  border: none;
+  border-radius: var(--r-sm);
+  color: var(--text-0);
+  font-size: 14.5px;
+  font-family: var(--font-body);
+  cursor: pointer;
+  transition: background var(--dur-fast);
+  text-align: left;
+}
+
+.ctx-item:hover, .ctx-item:active {
+  background: var(--bg-3);
+}
+
+.ctx-item--danger {
+  color: var(--danger);
+}
+
+.ctx-item--warn {
+  color: var(--warn);
+}
+
+.ctx-item__icon {
+  display: flex;
+  align-items: center;
+  color: inherit;
+  opacity: 0.8;
+}
+
+.ctx-divider {
+  height: 1px;
+  background: var(--hairline);
+  margin: 4px 0;
+}

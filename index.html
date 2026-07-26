@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en-EN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <title>Jora Apps</title>
+  <meta name="description" content="Jora Apps All the apps you need in one place.">
+  <meta name="keywords" content="joraapps,apps,myapps,webapp,web,jorabek,jora,ilova">
+  <meta name="author" content="Jora">
+  <meta name="robots" content="index, follow">
+
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://joraapps.vercel.app/">
+  <meta property="og:title" content="Jora Apps">
+  <meta property="og:description" content="Jora Apps All the apps you need in one place.">
+  <meta property="og:image" content="https://joraapps.vercel.app/static/og-banner.png"> <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://joraapps.vercel.app/">
+  <meta property="twitter:title" content="Jora Apps">
+  <meta property="twitter:description" content="Jora Apps All the apps you need in one place.">
+  <meta property="twitter:image" content="https://joraapps.vercel.app/static/og-banner.png">
+
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#6366f1">
+  <meta name="apple-mobile-web-app-title" content="Jora Apps">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="apple-touch-icon" href="/icons/icon-192.png">
+  <link rel="apple-touch-startup-image" href="/icons/splash-640x1136.png" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)">
+<link rel="apple-touch-startup-image" href="/icons/splash-1125x2436.png" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3)">
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+  <link rel="dns-prefetch" href="https://cdn.jsdelivr.net">
+  <link rel="canonical" href="https://joraapps.vercel.app/" />
+  <!-- Asosiy JS va CSS uchun -->
+<link rel="preload" href="/src/main.jsx" as="script" fetchpriority="high">
+<!-- Asosiy rasm/logo uchun -->
+<img src="/logo.png" fetchpriority="high" alt="Logo">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [{
+    "@type": "ListItem",
+    "position": 1,
+    "name": "Login",
+    "item": "https://joraapps.vercel.app/login"
+  }]
+}
+</script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Jora Apps",
+    "alternateName": "Jora Apps",
+    "url": "https://joraapps.vercel.app/",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://joraapps.vercel.app/{search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "url": "https://joraapps.vercel.app/",
+    "logo": "https://joraapps.vercel.app/icons/icon-512x512.png",
+    "contactPoint": {
+      "@type": "ContactPoint",
+      "email": "sjorabek42@gmail.com",
+      "contactType": "technical support"
+    }
+  }
+  </script>
+  <style type="text/css">
+    /* Ilova "bounce" qilmasligi uchun */
+body {
+  overscroll-behavior-y: none; /* Sahifa tortilganda sakramasligi uchun */
+  overflow: hidden; /* Agar ilova scroll bo'lmasa */
+  touch-action: manipulation; /* "Tap" larni tezlashtiradi */
+}
+
+/* Matnni tanlashni taqiqlash (Native ilovalar matnni tanlamaydi) */
+* {
+  -webkit-tap-highlight-color: transparent;
+  user-select: none; /* Foydalanuvchi matnni tasodifiy ajratib olmasligi uchun */
+}
+
+/* Scrollbar-ni yashirish (Native ilovalardek) */
+::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
+
+/* Input bosilganda ko'k ramkani yo'qotish */
+input:focus, textarea:focus {
+  outline: none;
+  box-shadow: none;
+  border: 1px solid #6366f1; /* Faqat o'zingizning rangiz */
+}
+  </style>
+</head>
+<body>
+
+  <header style="display:none;">
+    <h1>Jora Apps</h1>
+  </header>
+
+  <main id="root">
+    <noscript>To fully use the site, enable JavaScript.</noscript>
+  </main>
+<script>
+      if ('serviceWorker' in navigator) {
+    function registerSW() {
+      navigator.serviceWorker.register('/sw.js')
+        .then(function(reg) {
+          console.log('JoraApps faol:', reg.scope);
+          
+          reg.addEventListener('updatefound', function() {
+            var newWorker = reg.installing;
+            newWorker.addEventListener('statechange', function() {
+              if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                if (!window.isUserPlaying) {
+                  window.location.reload();
+                } else {
+                  window.updatePending = true;
+                }
+              }
+            });
+          });
+        })
+        .catch(function(err) {
+          console.error('Service Worker xatoligi:', err);
+        });
+    }
+
+    // Brauzer tayyor bo'lsa darhol ishlat, bo'lmasa yuklanishini kut
+    if (document.readyState === 'complete') {
+      registerSW();
+    } else {
+      window.addEventListener('load', registerSW);
+    }
+  }
+
+  async function requestWakeLock() {
+      try {
+        const wakeLock = await navigator.wakeLock.request('screen');
+        console.log('Ekran o‘chmaydi!');
+      } catch (err) {
+        console.warn('WakeLock faollashmadi:', err);
+      }
+    }
+    
+    // Foydalanuvchi ilova bilan ishlashni boshlaganda chaqiring
+    window.addEventListener('click', requestWakeLock, { once: true });
+    </script>
+<script type="module" src="/src/main.jsx"></script>
+</body>
+</html>

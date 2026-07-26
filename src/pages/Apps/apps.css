@@ -1,0 +1,119 @@
+.apps-page {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.apps-filters {
+  display: flex;
+  gap: 8px;
+  padding: 12px 16px 4px;
+  overflow-x: auto;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  touch-action: pan-x;
+}
+
+.apps-filters::-webkit-scrollbar { display: none; }
+
+.apps-filter-chip {
+  flex-shrink: 0;
+  height: 32px;
+  padding: 0 14px;
+  border-radius: var(--r-pill);
+  border: 1.5px solid var(--hairline);
+  background: var(--bg-1);
+  color: var(--text-1);
+  font-size: 13px;
+  font-weight: 600;
+  font-family: var(--font-body);
+  cursor: pointer;
+  transition: background var(--dur-fast), color var(--dur-fast), border-color var(--dur-fast);
+  -webkit-tap-highlight-color: transparent;
+}
+
+.apps-filter-chip--active {
+  background: var(--accent-dim);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.apps-grid-wrap {
+  flex: 1;
+  padding: 12px 12px 0;
+}
+
+.apps-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+.apps-loader {
+  display: flex;
+  justify-content: center;
+  padding: 60px 0;
+}
+
+.apps-empty {
+  display: flex;
+  justify-content: center;
+  padding: 60px 0;
+  color: var(--text-2);
+  font-size: 15px;
+}
+
+.apps-more-sentinel {
+  padding: 24px 0 8px;
+  display: flex;
+  justify-content: center;
+}
+
+.apps-end {
+  font-size: 13px;
+  color: var(--text-2);
+  text-align: center;
+  margin: 0;
+}
+
+.apps-load-more {
+  background: none;
+  border: 1px solid var(--hairline);
+  color: var(--text-1);
+  border-radius: var(--r-pill);
+  padding: 8px 20px;
+  font-size: 13.5px;
+  cursor: pointer;
+}
+
+@media (max-width: 400px) {
+  .apps-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 600px) {
+  .apps-grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+@media (min-width: 860px) {
+  .apps-grid {
+    grid-template-columns: repeat(6, 1fr);
+    gap: 14px;
+  }
+  .apps-grid-wrap {
+    padding: 16px 28px 0;
+    max-width: 1100px;
+    margin: 0 auto;
+    width: 100%;
+  }
+  .apps-filters {
+    padding: 14px 28px 4px;
+    max-width: 1100px;
+    margin: 0 auto;
+    width: 100%;
+    box-sizing: border-box;
+  }
+}

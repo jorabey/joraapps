@@ -1,0 +1,104 @@
+.perm-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 4px;
+  border-bottom: 1px solid var(--hairline);
+  cursor: pointer;
+  gap: 12px;
+}
+
+.perm-row:last-child {
+  border-bottom: none;
+}
+
+.perm-label {
+  font-size: 14.5px;
+  color: var(--text-0);
+  flex: 1;
+}
+
+/* iOS-style toggle via checkbox */
+.perm-toggle {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 48px;
+  height: 28px;
+  border-radius: var(--r-pill);
+  background: var(--bg-3);
+  position: relative;
+  cursor: pointer;
+  transition: background var(--dur-base);
+  flex-shrink: 0;
+  border: none;
+}
+
+.perm-toggle:checked {
+  background: var(--accent);
+}
+
+.perm-toggle::before {
+  content: '';
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #fff;
+  transition: transform var(--dur-base) var(--ease-spring);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+}
+
+.perm-toggle:checked::before {
+  transform: translateX(20px);
+}
+
+/* Reason chips */
+.reason-chip {
+  padding: 7px 14px;
+  border-radius: var(--r-pill);
+  background: var(--bg-3);
+  border: 1px solid var(--hairline);
+  color: var(--text-1);
+  font-size: 13px;
+  font-family: var(--font-body);
+  cursor: pointer;
+  transition: background var(--dur-fast), color var(--dur-fast), border-color var(--dur-fast);
+  white-space: nowrap;
+}
+
+.reason-chip:active {
+  background: var(--bg-3);
+}
+
+.reason-chip--active {
+  background: var(--danger-dim);
+  border-color: var(--danger);
+  color: var(--danger);
+}
+
+/* Report textarea */
+.report-textarea {
+  width: 100%;
+  background: var(--bg-input);
+  border: 1.5px solid var(--hairline);
+  border-radius: var(--r-md);
+  color: var(--text-0);
+  font-size: 14.5px;
+  font-family: var(--font-body);
+  padding: 12px 14px;
+  resize: vertical;
+  min-height: 90px;
+  outline: none;
+  transition: border-color var(--dur-fast);
+  line-height: 1.5;
+}
+
+.report-textarea:focus {
+  border-color: var(--violet);
+}
+
+.report-textarea::placeholder {
+  color: var(--text-2);
+}

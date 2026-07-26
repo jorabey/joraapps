@@ -1,0 +1,199 @@
+/* ============================================================
+   Jora Apps — Design tokens
+   A connections hub for mini-apps. Visual language: deep
+   graphite surfaces, a signal-lime accent for "live/connected"
+   states, and a soft signal-violet for interactive accents.
+   Signature element: the "orbit dot" — a small ring + core used
+   for connection states, avatars, and the loading mark.
+   ============================================================ */
+
+:root {
+  /* --- Color: surfaces --- */
+  --bg-0: #0A0B0F;          /* app background */
+  --bg-1: #12141B;          /* raised surface (cards, sheets) */
+  --bg-2: #1A1D26;          /* elevated surface (modals, menus) */
+  --bg-3: #232733;          /* hover / pressed surface */
+  --bg-input: #16181F;
+
+  --hairline: rgba(255, 255, 255, 0.07);
+  --hairline-strong: rgba(255, 255, 255, 0.12);
+
+  /* --- Color: text --- */
+  --text-0: #F5F6F8;        /* primary */
+  --text-1: #ABB1C2;        /* secondary */
+  --text-2: #6B7180;        /* tertiary / placeholder */
+  --text-on-accent: #0A0B0F;
+
+  /* --- Color: accents --- */
+  --accent: #C2F94E;        /* signal-lime — "connected / live" */
+  --accent-dim: rgba(194, 249, 78, 0.14);
+  --accent-strong: #D4FF6B;
+
+  --violet: #8B7CFF;        /* interactive accent — links, focus */
+  --violet-dim: rgba(139, 124, 255, 0.14);
+
+  --danger: #FF6B6B;
+  --danger-dim: rgba(255, 107, 107, 0.12);
+  --warn: #FFC861;
+  --warn-dim: rgba(255, 200, 97, 0.12);
+
+  /* --- Type --- */
+  --font-display: 'Hanken Grotesk', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* --- Radius --- */
+  --r-sm: 10px;
+  --r-md: 14px;
+  --r-lg: 20px;
+  --r-xl: 28px;
+  --r-pill: 999px;
+
+  /* --- Shadow --- */
+  --shadow-soft: 0 8px 30px rgba(0, 0, 0, 0.35);
+  --shadow-lift: 0 16px 50px rgba(0, 0, 0, 0.5);
+
+  /* --- Layout chrome --- */
+  --topbar-h: 58px;
+  --navbar-h: 64px;
+  --safe-top: env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+
+  /* --- Motion --- */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --dur-fast: 140ms;
+  --dur-base: 220ms;
+  --dur-slow: 380ms;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--bg-0);
+  color: var(--text-0);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overscroll-behavior-y: none;
+  /* Real apps don't let you select/copy arbitrary UI text or trigger the
+     iOS "Copy / Look Up" callout on long-press. Inputs/textareas opt back
+     in below since users still need to select what THEY type. */
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+
+input, textarea, [contenteditable="true"] {
+  -webkit-user-select: text;
+  user-select: text;
+  -webkit-touch-callout: default;
+}
+
+/* Explicit opt-in for content that should remain selectable/copyable —
+   e.g. a username, an order ID, or app descriptions the user may want
+   to copy. Add this attribute deliberately where it's actually useful. */
+[data-selectable] {
+  -webkit-user-select: text;
+  user-select: text;
+  -webkit-touch-callout: default;
+}
+
+/* ----------------------------------------------------------
+   App-shell behaviour: lock viewport like a native app.
+   Disable pinch-zoom, double-tap zoom, text selection on chrome
+   elements, rubber-band overscroll, and pull-to-refresh, so a
+   browser tab reads as an installed app.
+
+   --app-vh is kept in sync with the VisualViewport API by
+   useViewportHeight() — it equals 100% normally, and shrinks to
+   the actual visible area when the on-screen keyboard opens, so
+   a focused input never ends up hidden behind the keyboard.
+   ---------------------------------------------------------- */
+html, body {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: var(--app-vh, 100%);
+  overflow: hidden;
+  touch-action: none;
+}
+
+#root {
+  position: fixed;
+  inset: 0;
+  height: var(--app-vh, 100%);
+  overflow: hidden;
+  touch-action: none;
+}
+
+img, svg {
+  -webkit-user-drag: none;
+  user-select: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+}
+
+input, textarea, select {
+  font-family: inherit;
+  -webkit-tap-highlight-color: transparent;
+}
+
+::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+
+:focus-visible {
+  outline: 2px solid var(--violet);
+  outline-offset: 2px;
+  border-radius: var(--r-sm);
+}
+
+::selection {
+  background: var(--violet-dim);
+}
+
+/* ----------------------------------------------------------
+   Typography helpers
+   ---------------------------------------------------------- */
+.heading {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.mono {
+  font-family: var(--font-mono);
+}
+
+/* ----------------------------------------------------------
+   Reduced motion
+   ---------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

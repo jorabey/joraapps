@@ -1,0 +1,11 @@
+/* TEAM */
+Chef Developer: Jo'rabek
+Contact: sjorabek42@gmail.com
+Telegram: @sjorabek42
+From: Samarkand, Uzbekistan
+
+/* SITE */
+Last update: 2026/07/03
+Standards: HTML5, CSS3, React, Node.js
+Components: Vite, TailwindCSS
+Software: VS Code

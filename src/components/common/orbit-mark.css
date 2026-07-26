@@ -1,0 +1,26 @@
+.orbit-mark {
+  display: block;
+  color: var(--accent);
+  flex-shrink: 0;
+}
+
+.orbit-mark__dot {
+  transform-origin: 16px 16px;
+}
+
+@keyframes orbit-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.orbit-mark--spin {
+  animation: orbit-spin 1.4s linear infinite;
+  transform-origin: 16px 16px;
+}
+
+.orbit-loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

@@ -1,0 +1,290 @@
+.sub-page {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.sub-page__body {
+  padding: 24px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex: 1;
+}
+
+.sub-error {
+  background: var(--danger-dim);
+  color: var(--danger);
+  border-radius: var(--r-md);
+  padding: 11px 14px;
+  font-size: 13.5px;
+  line-height: 1.5;
+}
+
+.sub-info-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 13px 16px;
+  background: var(--bg-1);
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-md);
+}
+
+.sub-info-label {
+  font-size: 13.5px;
+  color: var(--text-2);
+  font-weight: 500;
+}
+
+.sub-info-val {
+  font-size: 14.5px;
+  color: var(--text-0);
+  font-weight: 500;
+}
+
+.sub-section {
+  background: var(--bg-1);
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+}
+
+.sub-section-title {
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-2);
+  padding: 0 4px 8px;
+}
+
+.toggle-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--hairline);
+  gap: 12px;
+}
+
+.toggle-row:last-child { border-bottom: none; }
+
+.toggle-row__label {
+  flex: 1;
+}
+
+.toggle-row__title {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-0);
+  display: block;
+}
+
+.toggle-row__desc {
+  font-size: 12.5px;
+  color: var(--text-2);
+  display: block;
+  margin-top: 2px;
+}
+
+.ios-toggle {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 50px;
+  height: 28px;
+  border-radius: var(--r-pill);
+  background: var(--bg-3);
+  position: relative;
+  cursor: pointer;
+  transition: background var(--dur-base);
+  flex-shrink: 0;
+  border: none;
+}
+
+.ios-toggle:checked { background: var(--accent); }
+
+.ios-toggle::before {
+  content: '';
+  position: absolute;
+  top: 3px; left: 3px;
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  background: #fff;
+  transition: transform var(--dur-base) var(--ease-spring);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.3);
+}
+
+.ios-toggle:checked::before { transform: translateX(22px); }
+
+/* Military Fortress UI Design */
+.fortress-card {
+  background: var(--bg-1);
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-lg);
+  padding: 18px;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+}
+
+.fortress-card.fortress-active {
+  border-color: #ff3333;
+  background: linear-gradient(135deg, var(--bg-1) 0%, rgba(255, 51, 51, 0.03) 100%);
+  box-shadow: 0 4px 20px rgba(255, 51, 51, 0.08);
+}
+
+.fortress-header {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.fortress-icon {
+  font-size: 26px;
+  background: var(--bg-2);
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--r-md);
+}
+
+.fortress-title-block {
+  flex: 1;
+}
+
+.fortress-title-block h4 {
+  margin: 0 0 4px 0;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-0);
+}
+
+.fortress-title-block p {
+  margin: 0;
+  font-size: 12px;
+  color: var(--text-2);
+  line-height: 1.4;
+}
+
+.fortress-badge-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 14px;
+  padding-top: 12px;
+  border-top: 1px dashed var(--hairline);
+}
+
+.f-badge {
+  background: rgba(255, 51, 51, 0.1);
+  color: #ff3333;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: var(--r-sm);
+  text-transform: uppercase;
+}
+
+/* PIN management elements */
+.security-box {
+  background: var(--bg-1);
+  border: 1px solid var(--hairline);
+  border-radius: var(--r-lg);
+  padding: 16px;
+}
+
+.pin-status-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.status-label {
+  font-size: 14px;
+  color: var(--text-2);
+  margin-right: 6px;
+}
+
+.status-val {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.text-success { color: #2ecc71; }
+.text-danger { color: #e74c3c; }
+
+.pin-setup-zone {
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid var(--hairline);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.pin-type-selector {
+  display: flex;
+  gap: 8px;
+}
+
+.pin-type-selector button {
+  flex: 1;
+  background: var(--bg-2);
+  border: 1px solid var(--hairline);
+  padding: 6px;
+  border-radius: var(--r-md);
+  font-size: 12px;
+  color: var(--text-2);
+  cursor: pointer;
+}
+
+.pin-type-selector button.active {
+  background: var(--text-0);
+  color: var(--bg-0);
+  border-color: var(--text-0);
+}
+
+.pin-digit-input {
+  background: var(--bg-2);
+  border: 1px solid var(--hairline);
+  padding: 10px;
+  border-radius: var(--r-md);
+  text-align: center;
+  font-size: 16px;
+  letter-spacing: 4px;
+  color: var(--text-0);
+  outline: none;
+}
+.pin-digit-input:focus { border-color: var(--accent); }
+
+.pin-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.pin-actions button {
+  padding: 8px 16px;
+  border-radius: var(--r-md);
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+}
+
+.btn-cancel { background: var(--bg-3); color: var(--text-1); }
+.btn-save { background: var(--accent); color: white; }
+.btn-danger-action { background: #e74c3c; color: white; }
+.pin-warning-text { font-size: 12.5px; color: var(--text-2); margin: 0; }
+
+@media (min-width: 860px) {
+  .sub-page__body {
+    max-width: 580px;
+    margin: 0 auto;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 28px 24px;
+  }
+}

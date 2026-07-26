@@ -1,0 +1,110 @@
+.sheet-backdrop {
+  position: fixed;
+  inset: 0;
+  height: var(--app-vh, 100%);
+  background: rgba(5, 6, 9, 0.6);
+  backdrop-filter: blur(6px);
+  z-index: 500;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  animation: sheet-fade-in var(--dur-base) var(--ease-out);
+}
+
+@keyframes sheet-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.sheet {
+  width: 100%;
+  max-width: 460px;
+  max-height: 86vh;
+  background: var(--bg-2);
+  border-radius: var(--r-xl) var(--r-xl) 0 0;
+  border: 1px solid var(--hairline-strong);
+  border-bottom: none;
+  box-shadow: var(--shadow-lift);
+  display: flex;
+  flex-direction: column;
+  animation: sheet-up var(--dur-slow) var(--ease-spring);
+  padding-bottom: max(16px, var(--safe-bottom));
+  overflow: hidden;
+}
+
+@media (min-width: 720px) {
+  .sheet-backdrop {
+    align-items: center;
+  }
+  .sheet {
+    border-radius: var(--r-xl);
+    border-bottom: 1px solid var(--hairline-strong);
+    max-height: 80vh;
+    animation: sheet-pop var(--dur-slow) var(--ease-spring);
+  }
+  .sheet__grip {
+    display: none;
+  }
+}
+
+@keyframes sheet-up {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+
+@keyframes sheet-pop {
+  from { transform: translateY(24px) scale(0.97); opacity: 0; }
+  to { transform: translateY(0) scale(1); opacity: 1; }
+}
+
+.sheet__grip {
+  width: 36px;
+  height: 4px;
+  border-radius: var(--r-pill);
+  background: var(--hairline-strong);
+  margin: 10px auto 0;
+  flex-shrink: 0;
+}
+
+.sheet__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px 4px;
+  flex-shrink: 0;
+}
+
+.sheet__title {
+  font-size: 17px;
+  margin: 0;
+}
+
+.sheet__close {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: none;
+  background: var(--bg-3);
+  color: var(--text-1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.sheet__body {
+  padding: 16px 20px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-y;
+}
+
+.sheet__footer {
+  padding: 12px 20px 4px;
+  display: flex;
+  gap: 10px;
+  flex-shrink: 0;
+  border-top: 1px solid var(--hairline);
+  padding-top: 16px;
+}

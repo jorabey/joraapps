@@ -1,0 +1,92 @@
+.app-detail {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-detail__hero {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 24px 20px 16px;
+}
+
+.app-detail__icon {
+  width: 80px;
+  height: 80px;
+  border-radius: var(--r-lg);
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.app-detail__icon--placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(145deg, var(--bg-3), var(--violet-dim));
+  color: var(--text-0);
+  font-size: 32px;
+  font-weight: 700;
+  font-family: var(--font-display);
+}
+
+.app-detail__hero-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.app-detail__name {
+  font-size: 22px;
+  margin: 0 0 6px;
+  letter-spacing: -0.01em;
+}
+
+.app-detail__meta {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 13px;
+  color: var(--text-1);
+}
+
+.app-detail__sep {
+  color: var(--text-2);
+}
+
+.app-detail__verified {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.app-detail__actions {
+  padding: 4px 20px 20px;
+  display: flex;
+  gap: 10px;
+}
+
+.app-detail__desc {
+  padding: 0 20px 40px;
+  border-top: 1px solid var(--hairline);
+  padding-top: 20px;
+}
+
+.app-detail__desc p {
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--text-1);
+  margin: 0;
+}
+
+@media (min-width: 860px) {
+  .app-detail__hero, .app-detail__actions, .app-detail__desc {
+    max-width: 640px;
+    margin: 0 auto;
+    width: 100%;
+    box-sizing: border-box;
+    padding-left: 32px;
+    padding-right: 32px;
+  }
+}
