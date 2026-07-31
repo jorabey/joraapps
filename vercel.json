@@ -2,7 +2,7 @@
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "version": 2,
   "name": "joraapps",
-  "cleanUrls": true,
+  "cleanUrls": false,
   "trailingSlash": false,
   "regions": ["fra1"],
   "buildCommand": "npm run build",
@@ -33,7 +33,7 @@
       "destination": "https://api-joraapps.vercel.app/sitemap.xml"
     },
     {
-      "source": "/:path*",
+      "source": "/(.*)",
       "destination": "/index.html"
     }
   ],
