@@ -1,4 +1,5 @@
 {
+  "$schema": "https://openapi.vercel.sh/vercel.json",
   "version": 2,
   "name": "joraapps",
   "cleanUrls": true,
@@ -12,6 +13,7 @@
     "silent": true,
     "autoJobCancelation": true
   },
+
   "redirects": [
     {
       "source": "/admin",
@@ -24,20 +26,18 @@
       "permanent": true
     }
   ],
+
   "rewrites": [
     {
       "source": "/sitemap.xml",
       "destination": "https://api-joraapps.vercel.app/sitemap.xml"
     },
     {
-      "source": "/robots.txt",
-      "destination": "/robots.txt"
-    },
-    {
-      "source": "/((?!api/|assets/|icons/|screenshots/|favicon|manifest|sw\\.js|.*\\.[a-zA-Z0-9]+$).*)",
+      "source": "/:path*",
       "destination": "/index.html"
     }
   ],
+
   "headers": [
     {
       "source": "/(.*)",
@@ -85,7 +85,7 @@
       "headers": [
         {
           "key": "Cache-Control",
-          "value": "public, max-age=0, must-revalidate, no-cache"
+          "value": "no-cache, no-store, must-revalidate"
         },
         {
           "key": "Pragma",
@@ -102,7 +102,7 @@
       "headers": [
         {
           "key": "Cache-Control",
-          "value": "public, max-age=0, must-revalidate, no-cache"
+          "value": "no-cache, no-store, must-revalidate"
         },
         {
           "key": "Content-Type",
@@ -155,20 +155,7 @@
       ]
     },
     {
-      "source": "/fonts/(.*)",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
-        },
-        {
-          "key": "Access-Control-Allow-Origin",
-          "value": "*"
-        }
-      ]
-    },
-    {
-      "source": "/(.*)\\.(png|jpg|jpeg|gif|webp|svg|ico|cur|avif)",
+      "source": "/(.*)\\.(png|jpg|jpeg|gif|webp|svg|ico|avif)",
       "headers": [
         {
           "key": "Cache-Control",
@@ -195,24 +182,6 @@
         {
           "key": "Cache-Control",
           "value": "public, max-age=31536000, immutable"
-        }
-      ]
-    },
-    {
-      "source": "/(.*)\\.(mp3|mp4|webm|ogg|wav|aac|flac)",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
-        }
-      ]
-    },
-    {
-      "source": "/(.*)\\.(pdf|doc|docx|xls|xlsx|zip|rar|7z)",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=86400, stale-while-revalidate=604800"
         }
       ]
     }
