@@ -8,7 +8,15 @@
     { "handle": "filesystem" },
     { "src": "/old-page", "dest": "/new-page", "status": 301 },
     { "src": "/api/(.*)", "dest": "/api/$1" },
-    { "src": "/((?!api/).*)", "dest": "/index.html", "status": 200 }
+    { "src": "/((?!api/).*)", "dest": "/index.html", "status": 200 },
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
+    },
+    {
+      "src": "/sitemap.xml",
+      "dest": "https://api-joraapps.vercel.app/sitemap.xml" 
+    }
   ],
   "headers": [
     {
@@ -44,16 +52,6 @@
   ],
   "redirects": [
     { "source": "/admin", "destination": "https://admin-joraapps.vercel.app", "permanent": false }
-  ],
-  "rewrites": [
-   {
-      "source": "/(.*)",
-      "destination": "/index.html"
-    },
-    {
-      "source": "/sitemap.xml",
-      "destination": "https://api-joraapps.vercel.app/sitemap.xml" 
-    }
   ],
   "regions": ["fra1"],
   "buildCommand": "npm run build",
